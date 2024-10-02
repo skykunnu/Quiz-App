@@ -14,6 +14,7 @@ let flag = 0;
 let count=0;
 let selectedOption;
 let selectedAnswer;
+let timeOut;
 
 startBtn.addEventListener("click", startQuiz);
 
@@ -33,7 +34,7 @@ function startQuiz() {
         questionDiv.innerHTML=""
         optionsDiv.innerHTML=""
         timerDiv.style.display="none"
-        questionDiv.innerHTML=calculateScore(); // Problem 
+        questionDiv.innerHTML=calculateScore(); 
       } else {
         //change question
         displayQuestion();
@@ -54,12 +55,10 @@ function startQuiz() {
 }
 
 
-// Problem is coming here 
 function calculateScore(){
     for(let i=0;i<questions.length;i++){
         if(userAnswers[i]===CorrectAnswers[i]){
           count++;
-            console.log(userAnswers[i],CorrectAnswers[i])
         }
       }
       return `You answered ${count} out of ${questions.length} questions Correctly`;
@@ -89,10 +88,9 @@ function storeUserAnswer(e) {
    selectedOption=e.target;
   selectedAnswer=selectedOption.innerHTML;
   userAnswers.push(selectedAnswer);
-  optionColorUpdate()
-  // console.log(userAnswers);
+  optionColorUpdate();
   flag = 1;
-  // timer=1;
+  TimeOut();
 }
 
 function getRandomIndex() {
@@ -115,4 +113,11 @@ function optionColorUpdate(){
     selectedOption.style.color='white'
 
   }
+}
+
+
+function TimeOut(){
+  timeOut=setTimeout(()=>{
+    timer=1;
+  },300)
 }
